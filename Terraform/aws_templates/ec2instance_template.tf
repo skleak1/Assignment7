@@ -38,10 +38,10 @@ resource "aws_security_group" "ec2-sg" {
 }
 
 resource "aws_instance" "website_server" {
-  count           = var.instance_count
-  ami             = var.ami_id
-  instance_type   = var.instance_type
-  security_groups = [aws_security_group.ec2-sg.id]
+  count                  = var.instance_count
+  ami                    = var.ami_id
+  instance_type          = var.instance_type
+  vpc_security_group_ids = [aws_security_group.ec2-sg.id]
 
   root_block_device {
     volume_size = var.root_volume_size
