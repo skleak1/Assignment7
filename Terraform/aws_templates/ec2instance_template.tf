@@ -1,6 +1,6 @@
 resource "aws_key_pair" "ec2-key" {
   key_name   = "ec2-key"
-  public_key = file("./Terraform/ec2-key.pub")
+  public_key = file("${path.root}/ec2-key.pub")
 }
 
 resource "aws_default_vpc" "default" {
@@ -52,5 +52,9 @@ resource "aws_instance" "website_server" {
     Name = "${var.my_env}-app-instance"
   }
 
-  user_data = file("./Terraform/scripts/user_data.sh")
+  user_data = file("${path.root}/scripts/user-data.sh")
+}
+
+output "ec2_public_ip" {
+  value = aws_instance.website_server[*].public_ip
 }

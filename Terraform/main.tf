@@ -8,7 +8,7 @@ locals {
 
 module "website-ec2" {
   source           = "./aws_templates"
-  my_env           = "aupp-dev"
+  my_env           = "website"
   instance_type    = "t3.small"
   ami_id           = local.ubuntu
   root_volume_size = 8
@@ -17,5 +17,5 @@ module "website-ec2" {
 }
 
 output "ec2_public_ip" {
-  value = aws_instance.website_server.public_ip
+  value = module.website-ec2.ec2_public_ip
 }
