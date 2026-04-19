@@ -42,6 +42,7 @@ resource "aws_instance" "website_server" {
   ami                    = var.ami_id
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.ec2-sg.id]
+  key_name               = aws_key_pair.ec2-key.key_name
 
   root_block_device {
     volume_size = var.root_volume_size
